@@ -30,7 +30,7 @@ authRoutes.post('/signup', (req, res, next) => {
     const { username, password, campus, course } = req.body
 
     if (!username || !password) {
-        res.status(400).json9({message: "Provide username and password"})
+        res.status(400).json({message: "Provide username and password"})
         return
     }
     if (password.length < 6) {
