@@ -59,7 +59,7 @@ function Signup() {
                 </div>
             </div>
             <div className="right">
-                <div className="">
+                <div >
                     <h3>Hello!!!</h3>
                     <p>Welcome to IronProfile</p>
                 </div>
