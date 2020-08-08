@@ -22,12 +22,7 @@ const createAccount = data => {
   axios.post('http://localhost:3000/api/auth/signup', data).then(resp => console.log(resp))
 }
 
-const userLogin = data => {
-  axios.post('http://localhost:3000/api/auth/login', data)
-        .then(({data}) => {
-          localStorage.setItem('loggedInUser', JSON.stringify(data))
-        })
-}
+
 
 const initialState = {
   loginForm: {
@@ -53,11 +48,7 @@ const reducer = (state, action) => {
       createAccount(action.body)
       return {...state, signupForm: initialState.signupForm}
     case 'USER_LOGIN':
-      userLogin(action.body)
-      return {...state, loginForm: initialState.loginForm}
-    // case 'GET_USERDATA':
-    //   console.log(action)
-    //   return {...state, loggedInUser: action}
+      return {...state, loginForm: initialState.loginForm, loggedInUser: action.data}
     default: 
       return state
   }

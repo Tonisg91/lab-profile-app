@@ -2,13 +2,13 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 
 function Login() {
     const history = useHistory()
     const dispatch = useDispatch()
     const loginForm = useSelector(state => state.loginForm)
-    
 
     const handleChange = ({target}) => {
         dispatch({
@@ -17,18 +17,20 @@ function Login() {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const { username, password } = loginForm
         const body = {
             username,
             password
         }
+        const {data} = await axios.post('http://localhost:3000/api/auth/login', body)
+        localStorage.setItem('loggedInUser', JSON.stringify(data))
         dispatch({
             type: 'USER_LOGIN',
-            body
+            data
         })
-        
+        debugger
         history.push('/profile')
     }
 
